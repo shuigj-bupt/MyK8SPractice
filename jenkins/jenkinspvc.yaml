@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: opspv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/k8s
+
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: opspvc
+  namespace: kube-ops
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
